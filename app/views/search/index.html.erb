@@ -1,16 +1,1 @@
-<h1>Search for WA state voters</h1>
-<%= form_tag '/search' do %>
-  <%= label_tag 'first_name', 'First Name' %>
-  <%= text_field_tag 'first_name' %>
-
-  <%= label_tag 'last_name', 'Last Name' %>
-  <%= text_field_tag 'last_name' %>
-
-  <%= label_tag 'zip', 'Zip Code' %>
-  <%= text_field_tag 'zip' %>
-
-  <%= label_tag 'city', 'City' %>
-  <%= text_field_tag 'city' %>
-
-  <%= submit_tag 'Search' %>
-<% end %>
+<%= render partial: './layouts/search_form' %>
