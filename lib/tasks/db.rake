@@ -15,7 +15,7 @@ namespace :db do
   task :restore => :environment do
     cmd = nil
     with_config do |app, host, db, user|
-      cmd = "pg_restore #{db} /home/deploy/database_dump/voters.dump"
+      cmd = "pg_restore --dbname #{db} /home/deploy/database_dump/voters.dump"
     end
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke
