@@ -9,8 +9,9 @@ class SearchController < ApplicationController
   end
 
 
-  def show
-
+  private
+  def search_params
+    params.permit(:first_name, :last_name, :zip, :city)
   end
 
 end
