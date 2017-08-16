@@ -1,0 +1,12 @@
+<%= render partial: './layouts/search_form' %>
+
+<div class="apple_pagination results">
+  <% @voters.each do |voter| %>
+    <div class="voter">
+      <b><%= voter.full_name %></b><br>
+      Birthdate: <%= voter.birthdate %><br>
+      City: <%= voter.city %>
+    </div>
+  <% end %>
+  <%= will_paginate @voters, :container => false %>
+</div>
