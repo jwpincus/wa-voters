@@ -16,5 +16,6 @@
 /node_modules
 /yarn-error.log
 /db/voters.txt
+/db/voters.dump
 
 .byebug_history
