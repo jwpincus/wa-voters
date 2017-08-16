@@ -1,7 +1,7 @@
 class CreateVoters < ActiveRecord::Migration[5.1]
   def change
     create_table :voters, id: false do |t|
-      t.primary_key :state_voter_id
+      t.string :state_voter_id, null: false
       t.string :county_voter_id
       t.string :first_name
       t.string :middle_name
@@ -29,5 +29,6 @@ class CreateVoters < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+    add_index :voters, :state_voter_id, unique: true
   end
 end
