@@ -80,13 +80,13 @@ namespace :deploy do
   after  :finishing,    :restart
 end
 
-namespace :rake do
+namespace :deploy do
   desc "Invoke rake task"
   task :invoke do
     on roles(:app) do
       within "#{current_path}" do
         with rails_env: :production do
-          execute :rake, ENV['task']
+          execute :rake, ENV['task'] + "DISABLE_DATABASE_ENVIRONMENT_CHECK=1"
           # cap production deploy:invoke task=my:rake:task
         end
       end
