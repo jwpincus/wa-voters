@@ -5,7 +5,7 @@ namespace :db do
   task :dump => :environment do
     cmd = nil
     with_config do |app, host, db, user|
-      cmd = "pg_dump #{db} > #{Rails.root}/db/#{app}.dump"
+      cmd = "pg_dump -Fc #{db} > #{Rails.root}/db/#{app}.dump"
     end
     puts cmd
     exec cmd
