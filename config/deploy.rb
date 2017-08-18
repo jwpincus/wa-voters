@@ -80,6 +80,20 @@ namespace :deploy do
   after  :finishing,    :restart
 end
 
+namespace :rake do
+  desc "Invoke rake task"
+  task :invoke do
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, ENV['task']
+          # cap production deploy:invoke task=my:rake:task
+        end
+      end
+    end
+  end
+end
+
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
