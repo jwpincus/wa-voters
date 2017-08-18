@@ -1,11 +1,12 @@
 # Change these
 server '192.241.237.98', port: 3000, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@example.com:username/appname.git'
-set :application,     'appname'
+set :repo_url,        'git@github.com:jwpincus/wa-voters.git'
+set :application,     'voters'
 set :user,            'deploy'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
+set :branch, 'vanilla_deploy'
 
 # Don't change these unless you know what you're doing
 set :pty,             true
