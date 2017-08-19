@@ -19,3 +19,5 @@
 /db/voters.dump
 
 .byebug_history
+
+/db/*.sql
