@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815222453) do
+ActiveRecord::Schema.define(version: 20170826214242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "voters", id: false, force: :cascade do |t|
-    t.string "state_voter_id", null: false
+  create_table "voters", id: :string, force: :cascade do |t|
     t.string "county_voter_id"
     t.string "first_name"
     t.string "middle_name"
@@ -43,7 +42,19 @@ ActiveRecord::Schema.define(version: 20170815222453) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["state_voter_id"], name: "index_voters_on_state_voter_id", unique: true
+    t.index ["city"], name: "index_voters_on_city"
+    t.index ["first_name"], name: "index_voters_on_first_name"
+    t.index ["id"], name: "index_voters_on_id", unique: true
+    t.index ["last_name"], name: "index_voters_on_last_name"
+    t.index ["zip"], name: "index_voters_on_zip"
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.string "voter_id"
+    t.string "date"
+    t.string "county"
+    t.index ["voter_id"], name: "index_votes_on_voter_id"
+  end
+
+  add_foreign_key "votes", "voters"
 end

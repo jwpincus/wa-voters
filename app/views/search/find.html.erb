@@ -8,5 +8,19 @@
       City: <%= voter.city %>
     </div>
   <% end %>
-  <%= will_paginate @voters, :container => false %>
+
+  <div id="pagination">
+
+
+  <%= javascript_tag do %>
+    $(function(){
+      $.get({
+        url: `<%= pagination_path(request.params) %>`,
+        success: function(data){
+          $('#pagination').html(data)
+        }
+      })
+    })
+  <% end %>
+
 </div>
