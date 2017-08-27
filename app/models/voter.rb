@@ -1,5 +1,5 @@
 class Voter < ApplicationRecord
-
+  has_many :votes
   def self.search(params)
     params = params.to_h
     attrs_name_to_search = %w( zip city last_name first_name )
