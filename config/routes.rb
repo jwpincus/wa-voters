@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/pagination', to: 'search#pagination'
   namespace :api do
     resources :registration, only: [:index]
+    resources :age, only: [:index]
   end
 
 end

@@ -8,6 +8,6 @@ class Api::RegistrationController < ApplicationController
 
   private
   def filter_params
-    params.permit(:zip, :city, :age, :county)
+    params.slice(:zip_code, :city, :age, :county)
   end
 end

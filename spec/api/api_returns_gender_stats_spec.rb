@@ -20,7 +20,7 @@ describe 'API', type: :Api do
       expect(json['no_gender_voters']).to eq(1217)
     end
     it 'returns basic raw numbers for voters by zip' do
-      get '/api/registration?zip=98108'
+      get '/api/registration?zip_code=98108'
       expect(last_response.status).to be(200)
       json = JSON.parse(last_response.body).first
       expect(json['total_voters']).to eq(13574)
@@ -37,14 +37,23 @@ describe 'API', type: :Api do
       expect(json['female_voters']).to eq(703998)
       expect(json['no_gender_voters']).to eq(2585)
     end
-    it 'returns basic raw numbers for voters by age(in decades)' do
-      get '/api/registration?age=20'
+    it 'returns basic raw numbers for voters by age range' do
+      get '/api/registration?age=20-30'
       expect(last_response.status).to be(200)
       json = JSON.parse(last_response.body).first
-      expect(json['total_voters']).to eq(1375098)
-      expect(json['male_voters']).to eq(668515)
-      expect(json['female_voters']).to eq(703998)
-      expect(json['no_gender_voters']).to eq(2585)
+      expect(json['total_voters']).to eq(755413)
+      expect(json['male_voters']).to eq(367302)
+      expect(json['female_voters']).to eq(385630)
+      expect(json['no_gender_voters']).to eq(2481)
+    end
+    it 'returns basic raw numbers for voters by mixed params' do
+      get '/api/registration?age=20-30&city=seattle&zip_code=98108'
+      expect(last_response.status).to be(200)
+      json = JSON.parse(last_response.body).first
+      expect(json['total_voters']).to eq(2244)
+      expect(json['male_voters']).to eq(1097)
+      expect(json['female_voters']).to eq(1139)
+      expect(json['no_gender_voters']).to eq(8)
     end
   end
 end
