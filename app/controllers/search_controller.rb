@@ -16,7 +16,7 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.permit(:first_name, :last_name, :zip, :city)
+    params.permit(:first_name, :last_name, :zip_code, :city)
   end
 
 end

@@ -41,18 +41,18 @@ describe 'API', type: :Api do
       get '/api/registration?age=20-30'
       expect(last_response.status).to be(200)
       json = JSON.parse(last_response.body).first
-      expect(json['total_voters']).to eq(755413)
-      expect(json['male_voters']).to eq(367302)
-      expect(json['female_voters']).to eq(385630)
-      expect(json['no_gender_voters']).to eq(2481)
+      expect(json['total_voters']).to eq(755353)
+      expect(json['male_voters']).to eq(367282)
+      expect(json['female_voters']).to eq(385591)
+      expect(json['no_gender_voters']).to eq(2480)
     end
     it 'returns basic raw numbers for voters by mixed params' do
       get '/api/registration?age=20-30&city=seattle&zip_code=98108'
       expect(last_response.status).to be(200)
       json = JSON.parse(last_response.body).first
-      expect(json['total_voters']).to eq(2244)
+      expect(json['total_voters']).to eq(2243)
       expect(json['male_voters']).to eq(1097)
-      expect(json['female_voters']).to eq(1139)
+      expect(json['female_voters']).to eq(1138)
       expect(json['no_gender_voters']).to eq(8)
     end
   end

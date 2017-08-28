@@ -8,12 +8,11 @@ class Voter < ApplicationRecord
   scope :age, -> (age) { where birthdate: (Date.today - (age.split('-').last).to_i.years)..(Date.today - (age.split('-').first).to_i.years) }
 
   def self.search(params)
-    params = params.to_h
-    attrs_name_to_search = %w( zip city last_name first_name county age)
-    filtered_params = params.slice(*attrs_name_to_search).select { |_,v| v.present? }
-    filtered_params.each {|k,v| filtered_params[k] = v.upcase }
-    sql_cond = filtered_params.map { |k,_| "#{k} = :#{k}" }.join(' AND ')
-    where(sql_cond, filtered_params)
+    stats = where(nil)
+    params.each { |key, value|
+      stats = stats.public_send(key, value) if value.present?
+    }
+    stats
   end
 
   def full_name
@@ -26,7 +25,7 @@ class Voter < ApplicationRecord
     "SUM(CASE WHEN gender = 'F' THEN 1 ELSE 0 END) AS female_voters",
     "SUM(CASE WHEN gender = 'U' THEN 1 ELSE 0 END) AS no_gender_voters").reorder('')
     params.each { |key, value|
-      stats = stats.public_send(key, value)
+      stats = stats.public_send(key, value) if value.present?
     }
     stats
   end

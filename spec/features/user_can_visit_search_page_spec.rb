@@ -12,7 +12,7 @@ describe "Search form:" do
     end
     it "they see the zip search field" do
       visit '/'
-      expect(page).to have_css('#zip')
+      expect(page).to have_css('#zip_code')
     end
     it "they see the city search field" do
       visit '/'
