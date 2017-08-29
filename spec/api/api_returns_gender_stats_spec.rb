@@ -55,5 +55,20 @@ describe 'API', type: :Api do
       expect(json['female_voters']).to eq(1138)
       expect(json['no_gender_voters']).to eq(8)
     end
+    it 'returns basic raw numbers for voters by birthyear' do
+      get '/api/age'
+      expect(last_response.status).to be(200)
+      json = JSON.parse(last_response.body)
+      expect(json.first['birthyear']).to eq(1900)
+      expect(json.first['voters_registered']).to eq(5)
+      expect(json.length).to eq(101)
+    end
+    it 'returns basic raw numbers for voters by birthyear with params' do
+      get '/api/age?city=seattle'
+      expect(last_response.status).to be(200)
+      json = JSON.parse(last_response.body).first
+      expect(json['birthyear']).to eq(1900)
+      expect(json['voters_registered']).to eq(3)
+    end
   end
 end

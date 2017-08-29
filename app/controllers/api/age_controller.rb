@@ -2,7 +2,8 @@ class Api::AgeController < ApplicationController
   protect_from_forgery with: :exception, except: [:index]
 
   def index
-    @stats = Voter.select("date_trunc('year', birthdate) as birthyear", 'count(*) as voters_registered').group("birthyear").order('voters_registered')
+    @stats = Voter.search(filter_params)
+    @stats = @stats.select("extract(year FROM birthdate)::int as birthyear", 'count(*) as voters_registered').group("birthyear").order('birthyear')
     render json: @stats
   end
 
